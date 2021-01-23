@@ -1,0 +1,43 @@
+*{
+    font-family: 'Roboto Slab', serif;
+}
+
+.home-container{
+    margin: 24vh 0px ;
+    font-size: 1em;
+    color: white;
+    font-family: 'Roboto Slab', serif;
+}
+#room-form{
+    margin: 20px 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#room-form input {
+    font-size: 1em;    
+    width:200px;
+    padding:20px;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    border-radius: 11px;
+    outline: none;
+    margin: 0px 15px ;
+    color: white;
+    border: none;
+    background-color: #ffffff1c;
+  
+}
+  
+ button {
+    background-color: #81cc00;
+    font-size: 1.3rem;
+    padding: 13px;
+    color: white;
+    margin: 25px 0px;
+    margin-right: 10px;
+    border-radius: 9px;    
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
