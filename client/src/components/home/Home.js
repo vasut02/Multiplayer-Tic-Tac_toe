@@ -1,14 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react'
 import "./Home.css";
 import { UserContext } from "../../UserContext";
+import { useHistory , Link , Redirect } from "react-router-dom";
 const axios = require('axios');
 
 const Home = () => {
     const { user, setUser } = useContext(UserContext);
-
-    //To get Room Id 
-    const [id, setId] = useState('');
-
+    
     //Sample User
     const Vasu = {
         name: "Vasu",
@@ -20,18 +18,16 @@ const Home = () => {
         setUser(Vasu);
     }, [])
 
-    //Function to call server and get new room id 
+    //Programitically navigate Using React-Router-Dom
+    const browserHistory = useHistory();
+
+    //Function to call server and get new Room id 
     const genereateUniqueID = () => {
         console.log("idGenerated");
-
-        //using libaray to get 
         axios.get("http://localhost:8000/create_room").then(res => {
-            console.log(res.data)
-            setId(res.data.toUpperCase());
-        })        
-
+            browserHistory.push('/play/'+res.data)
+        })
     }
-
 
     return (
         <div className="home-container">
@@ -41,8 +37,7 @@ const Home = () => {
                 <button>Join Room</button>
             </form>
             <div>OR</div>
-            <button onClick={() => genereateUniqueID()}>Create Room</button>
-            <div>{id ? id : ''}</div>
+            <button onClick={genereateUniqueID}>Create Room</button>
         </div>
     )
 }

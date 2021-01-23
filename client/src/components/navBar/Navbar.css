@@ -1,0 +1,18 @@
+.NavBar{
+    margin: 15px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: start;
+}
+
+#logo{
+    filter: invert();
+    width: 3rem;
+    cursor: pointer;
+}
+
+#tictoe{
+    margin: 0px 10px; 
+    cursor: pointer;
+}
