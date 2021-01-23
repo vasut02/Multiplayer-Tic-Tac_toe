@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import "./Home.css";
 import { UserContext } from "../../UserContext";
 import { useHistory , Link , Redirect } from "react-router-dom";
+import serverURL from '../../constant'
 const axios = require('axios');
 
 const Home = () => {
@@ -24,7 +25,7 @@ const Home = () => {
     //Function to call server and get new Room id 
     const genereateUniqueID = () => {
         console.log("idGenerated");
-        axios.get("http://localhost:8000/create_room").then(res => {
+        axios.get(`http://${serverURL}/create_room`).then(res => {
             browserHistory.push('/play/'+res.data)
         })
     }
