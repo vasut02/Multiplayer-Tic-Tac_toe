@@ -3,7 +3,7 @@
 }
 
 .home-container{
-    margin: 24vh 0px ;
+    margin: 10vh 0px ;
     font-size: 1em;
     color: white;
     font-family: 'Roboto Slab', serif;
@@ -29,6 +29,19 @@
   
 }
   
+.error{
+    display: flex;
+    height: 3rem;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 20px;
+    width: fit-content;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 13px;
+    background-color: #ff000042;
+    color: rgb(252, 207, 207);
+}
  button {
     background-color: #81cc00;
     font-size: 1.3rem;

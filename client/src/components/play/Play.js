@@ -24,7 +24,7 @@ const Play = () => {
         }
         //emit join user event to server with below parmas 
         socket.emit('join' , {name: user.name , user_id:user.id , room_id});
-        console.log( user.name +" "+ user.id);
+        console.log( user.name +" "+ user.id  +" " + room_id);
     }, [ENDPT])      
     
     //No point in countinuing if user does not exist
