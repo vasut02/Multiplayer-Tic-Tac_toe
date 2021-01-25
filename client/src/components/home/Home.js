@@ -12,7 +12,7 @@ const Home = () => {
 
     //Sample User
     const Vasu = {
-        name: "Vasu",
+        name: "vasu",
         id: "69"
     }
 

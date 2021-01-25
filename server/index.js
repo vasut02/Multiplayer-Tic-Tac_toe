@@ -22,7 +22,7 @@ const mongoDB = "mongodb://127.0.0.1:27017/MultiTicToe"
 //connect local database 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Database Connected...'))
-    .catch(err => console.log(err));
+    .catch(err => console.log('Error connecting database',err));
 
 //To remove depreceate warning
 mongoose.set('useNewUrlParser', true);
@@ -30,6 +30,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 const Room = require('./models/Room');
+const Message = require('./models/Message');
 
 
 //post request to join room
@@ -40,17 +41,22 @@ app.post('/join_room', jsonParser, async (req, res) => {
     const room_id = req.body.room_id;
     const oyo_room = await Room.findOne({ uID: room_id })
         .catch((err) => {
-            console.log(err)
+            console.log('error occured while checking room',err)
         });
 
     console.log('room' ,oyo_room);
     flag = false;
     if (oyo_room) {
+        // check if room has less than 2 user
         if (oyo_room.noOfUser < 2) {
+
+            // increase no of user
             oyo_room.noOfUser++;
             const doc = await oyo_room.save();
+
             res.status(200).json({doc});
         } else {
+            //Room is full
             res.status(200).json({ err: "Room is Full can't join " })
         }
     } else {
@@ -77,7 +83,7 @@ app.get('/create_room', (req, res) => {
     room.save().then(() => {
         console.log('room created', result);
     }).catch((err) => {
-        console.log(err);
+        console.log('err creating room',err);
     })
 
     res.json(result);
@@ -92,18 +98,23 @@ app.get("/", (req, res) => {
 io.on('connection', (socket) => {
 
     //incoming message from chat.js
-    socket.on('sendMessage' , ( { message , user_name , user_id , room_id } )=>{
-        // console.log('message incoming' , message);
-        // console.log(user);
-
-        const msg = {
-            user_name,
+    socket.on('sendMessage' , async ( { message , name , user_id , room_id } )=>{
+        const msgToStore = {
+            name,
             user_id,
             room_id,
-            message
+            text: message
         }
 
-        console.log(msg);
+        const oyo_room = await Room.findOne({ uID: room_id })
+        .catch((err) => {
+            console.log('error occured while checking room',err)
+        });
+
+        console.log(oyo_room._id);
+        console.log('room u asked for',oyo_room);
+        io.to(oyo_room._id).emit('messageReceived',msgToStore);
+
     })
 })
 

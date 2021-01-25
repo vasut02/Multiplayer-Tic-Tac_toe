@@ -34,7 +34,7 @@ const Play = () => {
     return (
         <div>
             Hello World {room_id?room_id:''}
-            <Chat/>
+            <Chat room_id={room_id?room_id:''} />
         </div>
     )
 }
