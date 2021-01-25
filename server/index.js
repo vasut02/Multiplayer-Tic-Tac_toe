@@ -91,6 +91,20 @@ app.get("/", (req, res) => {
 //Open Socket io Connection
 io.on('connection', (socket) => {
 
+    //incoming message from chat.js
+    socket.on('sendMessage' , ( { message , user_name , user_id , room_id } )=>{
+        // console.log('message incoming' , message);
+        // console.log(user);
+
+        const msg = {
+            user_name,
+            user_id,
+            room_id,
+            message
+        }
+
+        console.log(msg);
+    })
 })
 
 
