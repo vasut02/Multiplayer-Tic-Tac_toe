@@ -70,10 +70,10 @@ const Home = () => {
                     onChange={e => { setError(''); setRoom_id(e.target.value) }}
                     id="join Room"
                     placeholder='Enter Room ID' />
-                <button>Join Room</button>
+                <button className="input-button">Join Room</button>
             </form>            
             <div>OR</div>
-            <button onClick={genereateUniqueID}>Create Room</button>
+            <button className="input-button" onClick={genereateUniqueID}>Create Room</button>
         </div>
     )
 }

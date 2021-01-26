@@ -42,7 +42,7 @@
     background-color: #ff000042;
     color: rgb(252, 207, 207);
 }
- button {
+ .input-button {
     background-color: #81cc00;
     font-size: 1.3rem;
     padding: 13px;

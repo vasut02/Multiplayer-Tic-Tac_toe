@@ -3,10 +3,11 @@ import React ,{useState , useEffect , useContext} from 'react'
 import Input from './input/Input'
 import io from 'socket.io-client'
 import serverURL from "../../../constant";
+import Message from './Messages/Message'
 import {UserContext} from "../../../UserContext"
 
-let socket;
-const Chat = ({room_id}) => {
+// let socket;
+const Chat = ({socket ,room_id}) => {
     
     const ENDPT = `http://${serverURL}/`
 
@@ -15,18 +16,18 @@ const Chat = ({room_id}) => {
     const [message, setMessage] = useState('');
     //array to store message
     const [messages, setMessages] = useState([]);
-    
 
-    //Initialize Sokcet.io
-    useEffect(() => {
-        socket = io(ENDPT);
-    }, [ENDPT]) 
+
+    // //Initialize Sokcet.io
+    // useEffect(() => {
+    //     socket = io(ENDPT);
+    //     socket.emit('join' , room_id );
+    // }, [ENDPT]) 
    
     //function that sends message to server
     const sendMessage = (e)=>{
         e.preventDefault();
         console.log(message);
-
         //emit messsage to sokcet server
         const msg = {
             message,
@@ -42,15 +43,15 @@ const Chat = ({room_id}) => {
 
     useEffect(() => {
         socket.on('messageReceived', message => {
-            setMessages([...messages, message])
-            console.log('chithi ayi',message);
-        })
-    }, [messages])
+            // console.log('Agya Agya Maal Agya',message);
+            setMessages(msgs => [ ...msgs, message ]);
+          });
+    }, [])
 
 
     return (
         <div>
-            <div>{messages}</div>
+            <Message Messages={messages} />
             <Input 
                 message= {message}
                 setMessage= {setMessage}

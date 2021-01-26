@@ -12,7 +12,7 @@ input {
   
 }
   
- button {
+form button {
     background-color: #81cc00;
     font-size: 1.3rem;
     padding: 13px;

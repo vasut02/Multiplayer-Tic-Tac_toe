@@ -30,12 +30,11 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 const Room = require('./models/Room');
-const Message = require('./models/Message');
 
 
 //post request to join room
 app.post('/join_room', jsonParser, async (req, res) => {
-    console.log('req reciveed', req.body);
+    // console.log('req reciveed', req.body);
 
     //check if the room which this exist or not
     const room_id = req.body.room_id;
@@ -44,7 +43,7 @@ app.post('/join_room', jsonParser, async (req, res) => {
             console.log('error occured while checking room',err)
         });
 
-    console.log('room' ,oyo_room);
+    // console.log('room' ,oyo_room);
     flag = false;
     if (oyo_room) {
         // check if room has less than 2 user
@@ -85,7 +84,7 @@ app.get('/create_room', (req, res) => {
     }).catch((err) => {
         console.log('err creating room',err);
     })
-
+    
     res.json(result);
 })
 
@@ -97,6 +96,11 @@ app.get("/", (req, res) => {
 //Open Socket io Connection
 io.on('connection', (socket) => {
 
+    // user join register room_id 
+    socket.on('join' , room_id=>{
+        console.log('user joined' , room_id);
+        socket.join(room_id);
+    })
     //incoming message from chat.js
     socket.on('sendMessage' , async ( { message , name , user_id , room_id } )=>{
         const msgToStore = {
@@ -105,16 +109,8 @@ io.on('connection', (socket) => {
             room_id,
             text: message
         }
-
-        const oyo_room = await Room.findOne({ uID: room_id })
-        .catch((err) => {
-            console.log('error occured while checking room',err)
-        });
-
-        console.log(oyo_room._id);
-        console.log('room u asked for',oyo_room);
-        io.to(oyo_room._id).emit('messageReceived',msgToStore);
-
+        
+        io.to(room_id).emit('messageReceived',msgToStore);
     })
 })
 
