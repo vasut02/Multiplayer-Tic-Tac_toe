@@ -5,7 +5,7 @@ const Message = ({Messages }) => {
     return (
         <div>
             {Messages.map((message , i ) => {                
-                return <Msg  message={message}/>
+                return <Msg key={i} message={message}/>
             })}
         </div>
     )

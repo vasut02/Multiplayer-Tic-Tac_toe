@@ -5,7 +5,7 @@ import Chat from './chat/Chat';
 import io from 'socket.io-client'
 import serverURL from "../../constant";
 import {UserContext} from "../../UserContext"
-import Game from '../tc-toe Board/Game'
+import Game from './tc-toe Board/Game'
 
 let socket;
 const Play = () => {
@@ -38,7 +38,7 @@ const Play = () => {
     return (socketHasBeenInitialized)?(        
         <div>
             Hello World {room_id?room_id:''}
-            <Game/>
+            <Game socket={socket} room_id={room_id?room_id:''} />
             <Chat socket={socket} room_id={room_id?room_id:''} />
         </div>
     ):(

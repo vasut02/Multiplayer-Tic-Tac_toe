@@ -48,6 +48,11 @@ const Chat = ({socket ,room_id}) => {
           });
     }, [])
 
+    // useEffect(() => {
+	// 	socket.on('squareClickedReceived', click=>{
+    //         console.log('emitted congratz',click);
+	// 	})
+	// })
 
     return (
         <div>

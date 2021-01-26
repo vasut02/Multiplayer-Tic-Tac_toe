@@ -112,6 +112,17 @@ io.on('connection', (socket) => {
         
         io.to(room_id).emit('messageReceived',msgToStore);
     })
+
+    socket.on('squareClicked' , ( {i , name , user_id , room_id} )=>{
+        const click = {
+			i,
+			name,
+            user_id,
+            room_id,
+		};
+        console.log(`${name} clicked ${i} square in room ${room_id}`);
+        io.to(room_id).emit('squareClickedReceived' , click );
+    })
 })
 
 
