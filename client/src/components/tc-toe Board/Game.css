@@ -22,22 +22,24 @@ body {
   
   .status {
     margin-bottom: 10px;
+    color: wheat;
   }
   
   .square {
     color: black;
-    background: #fff;
-    border: 1px solid #999;
+    background:rgb(53, 53, 53);
+    color: wheat;
+    border: 1px solid #fff;
     float: left;
     font-size: 24px;
     font-weight: bold;
     line-height: 34px;
-    height: 34px;
+    height: 6rem;
     margin-right: -1px;
     margin-top: -1px;
     padding: 0;
     text-align: center;
-    width: 34px;
+    width: 6rem;
   }
   
   .square:focus {
