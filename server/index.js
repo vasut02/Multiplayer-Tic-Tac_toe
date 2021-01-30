@@ -123,6 +123,10 @@ io.on('connection', (socket) => {
         console.log(`${name} clicked ${i} square in room ${room_id}`);
         io.to(room_id).emit('squareClickedReceived' , click );
     })
+
+    socket.on('playAgain' , room_id=>{
+        io.to(room_id).emit('playAgainReceived');
+    })
 })
 
 

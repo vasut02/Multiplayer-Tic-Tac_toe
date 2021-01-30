@@ -17,9 +17,9 @@ const Home = () => {
     }
 
     //Set User just for example
-    useEffect(() => {
-        setUser(Vasu);
-    }, [])
+    // useEffect(() => {
+    //     setUser(Vasu);
+    // }, [])
 
     const joinRoom = async (e) => {
         e.preventDefault();
@@ -57,6 +57,10 @@ const Home = () => {
         axios.get(`http://${serverURL}/create_room`).then(res => {
             browserHistory.push('/play/' + res.data)
         })
+    }
+
+    if (user === null  ){
+        return <Redirect to="/nickname"/>
     }
 
     return (

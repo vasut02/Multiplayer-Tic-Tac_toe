@@ -6,6 +6,8 @@ import io from 'socket.io-client'
 import serverURL from "../../constant";
 import {UserContext} from "../../UserContext"
 import Game from './tc-toe Board/Game'
+import Board from './tc-toe Board/Board'
+import './play.css'
 
 let socket;
 const Play = () => {
@@ -36,9 +38,9 @@ const Play = () => {
         return <Redirect to='/login'/>;
     }
     return (socketHasBeenInitialized)?(        
-        <div>
-            Hello World {room_id?room_id:''}
-            <Game socket={socket} room_id={room_id?room_id:''} />
+        <div className='play'>
+            {room_id?room_id:''}
+            <Board socket={socket} room_id={room_id?room_id:''} />
             <Chat socket={socket} room_id={room_id?room_id:''} />
         </div>
     ):(

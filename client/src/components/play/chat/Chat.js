@@ -7,7 +7,7 @@ import Message from './Messages/Message'
 import {UserContext} from "../../../UserContext"
 
 // let socket;
-const Chat = ({socket ,room_id}) => {
+const Chat = ({socket , room_id}) => {
     
     const ENDPT = `http://${serverURL}/`
 
@@ -16,13 +16,6 @@ const Chat = ({socket ,room_id}) => {
     const [message, setMessage] = useState('');
     //array to store message
     const [messages, setMessages] = useState([]);
-
-
-    // //Initialize Sokcet.io
-    // useEffect(() => {
-    //     socket = io(ENDPT);
-    //     socket.emit('join' , room_id );
-    // }, [ENDPT]) 
    
     //function that sends message to server
     const sendMessage = (e)=>{
@@ -48,15 +41,9 @@ const Chat = ({socket ,room_id}) => {
           });
     }, [])
 
-    // useEffect(() => {
-	// 	socket.on('squareClickedReceived', click=>{
-    //         console.log('emitted congratz',click);
-	// 	})
-	// })
-
     return (
         <div>
-            <Message Messages={messages} />
+            <Message Messages={messages} user={user} />
             <Input 
                 message= {message}
                 setMessage= {setMessage}

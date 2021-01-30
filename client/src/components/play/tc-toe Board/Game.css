@@ -52,11 +52,24 @@ body {
   
   .game {
     display: flex;
-    width: fit-content;
+    width: min-content;
     flex-direction: row;
   }
   
   .game-info {
     margin-left: 20px;
+  }
+  
+    .input-button {
+      background-color: #81cc00;
+      font-size: 1.3rem;
+      padding: 13px;
+      color: white;
+      margin: 25px 0px;
+      margin-right: 10px;
+      border-radius: 9px;    
+      outline: none;
+      border: none;
+      cursor: pointer;
   }
   

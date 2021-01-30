@@ -1,6 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect , useRef } from 'react';
 import Sqaure from './Sqaure'
-import io from 'socket.io-client'
 import calculateWinner from "./calculateWinner";
 import { UserContext } from "../../../UserContext"
 import serverURL from "../../../constant";
@@ -14,8 +13,9 @@ const Board = ({ socket, room_id }) => {
 	const [squares, setSquares] = useState(Array(9).fill(null))
 	const [, updateState] = React.useState();
 	const forceUpdate = React.useCallback(() => updateState({}), []);
-	const [xIsNext, setXIsNext] = useState(true)
-
+	const xIsNext = useRef(true);
+	const Chance = useRef(1);
+	
 	const winner = calculateWinner(squares);
 	let status;
 	if (winner) {
@@ -26,25 +26,37 @@ const Board = ({ socket, room_id }) => {
 
 	useEffect(() => {
 		socket.on('squareClickedReceived', click => {
-			console.log('emitted congratz', click.i);
-			const i = click.i;
-			console.log(xIsNext);
-			squares[i] = xIsNext ? 'X' : 'O';
-			setXIsNext(!xIsNext);
-			console.log(xIsNext);
+			const i = click.i;			
+			squares[i] = xIsNext.current ? 'X' : 'O';
+			xIsNext.current = !xIsNext.current;				
 			setSquares(squares);
+
+			if ( Chance.current === 2 ) Chance.current = 1;
+			if ( Chance.current === -1 ) Chance.current = 2;
 			console.log(squares);
 			forceUpdate();
+		})		
+	} , [squares, xIsNext ])
+
+
+	useEffect(() => {
+		socket.on('playAgainReceived', () => {
+			squares.fill(null);
+			setSquares(squares)
+			console.log(squares);
+			Chance.current = 1;
+			forceUpdate();
 		})
-	}, [xIsNext])
+	}, [squares])
+	
 
 	const handleClick = (i) => {
 
-		if (calculateWinner(squares) || squares[i]) {
+		if ( Chance.current === 2 || Chance.current === -1 || calculateWinner(squares) || squares[i]) {
 			return;
 		}
 
-		console.log('emitting');
+		// console.log('emitting');
 		const click = {
 			i,
 			name: user.name,
@@ -52,12 +64,11 @@ const Board = ({ socket, room_id }) => {
 			room_id
 		};
 		socket.emit('squareClicked', click);
+		Chance.current = -1;
+	}
 
-		// squares[i] = xIsNext ? 'X' : 'O';
-		// setSquares(squares);
-		// setXIsNext(!xIsNext);
-		// // console.log(squares);
-		// forceUpdate();
+	const PlayAgain = () => {
+		socket.emit('playAgain', room_id);
 	}
 
 	const renderSquare = (i) => {
@@ -69,7 +80,7 @@ const Board = ({ socket, room_id }) => {
 
 	return (
 		<div id="Board">
-			<div className="status">{status}</div>
+			<div className="status">{status}</div>			
 			<div id="Board_game">
 				<div className="board-row">
 					{renderSquare(0)}
@@ -87,6 +98,7 @@ const Board = ({ socket, room_id }) => {
 					{renderSquare(8)}
 				</div>
 			</div>
+			<button onClick={PlayAgain} className='input-button' >Play Again</button>
 		</div>
 	)
 }
