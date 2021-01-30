@@ -97,9 +97,18 @@ app.get("/", (req, res) => {
 io.on('connection', (socket) => {
 
     // user join register room_id 
-    socket.on('join' , room_id=>{
+    socket.on('join' , async room_id=>{
         console.log('user joined' , room_id);
         socket.join(room_id);
+
+        const oyo_room = await Room.findOne({ uID: room_id })
+        .catch((err) => {
+            console.log('error occured while checking room',err)
+        });
+
+        if ( oyo_room && oyo_room.noOfUser === 2 ) {
+            io.to(room_id).emit('youCanPLayNow');
+        }
     })
     //incoming message from chat.js
     socket.on('sendMessage' , async ( { message , name , user_id , room_id } )=>{

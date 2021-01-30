@@ -8,6 +8,7 @@ import {UserContext} from "../../UserContext"
 import Game from './tc-toe Board/Game'
 import Board from './tc-toe Board/Board'
 import './play.css'
+import Loading from './Loading/Loading'
 
 let socket;
 const Play = () => {
@@ -19,6 +20,7 @@ const Play = () => {
     const { room_id } = useParams();
     
     const [socketHasBeenInitialized, setSocketHasBeenInitialized] = useState(false)
+    const [playNow, setPlayNow] = useState(false);
 
     useEffect(() => {
         socket = io(ENDPT);
@@ -31,20 +33,27 @@ const Play = () => {
         socket.emit('join' , room_id );
         console.log( user.name +" "+ user.id  +" " + room_id);
 
-    }, [ENDPT])      
+    }, [ENDPT])    
+    
+    useEffect(() => {
+        socket.on('youCanPLayNow' , ()=>{
+            // console.log('YouCanPLayNow');
+            setPlayNow(true);
+        })  
+    },[])
     
     //No point in countinuing if user does not exist
     if (!user) {
         return <Redirect to='/login'/>;
     }
-    return (socketHasBeenInitialized)?(        
+    return ( playNow && socketHasBeenInitialized)?(        
         <div className='play'>
             {room_id?room_id:''}
             <Board socket={socket} room_id={room_id?room_id:''} />
             <Chat socket={socket} room_id={room_id?room_id:''} />
         </div>
     ):(
-        <div>Loading...</div>
+        <div><Loading room_id={room_id}/></div>
     )
 }
 

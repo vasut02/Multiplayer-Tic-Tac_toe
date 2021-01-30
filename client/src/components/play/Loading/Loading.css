@@ -1,0 +1,12 @@
+#loadingroom_id{
+    padding: 15px;
+    border-radius: 5px;
+    background: #ffffff1c;
+    width: fit-content;
+    cursor: pointer;
+}
+
+#loadingroom_idcontainer{
+    display: flex;
+    justify-content: center;
+}
