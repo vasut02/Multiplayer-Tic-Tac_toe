@@ -1,11 +1,14 @@
-#loadingroom_id{
+#loadingroom_id{    
+    background: #ffffff1c;
+    color: #81cc00;
+}
+
+div p {
     padding: 15px;
     border-radius: 5px;
-    background: #ffffff1c;
     width: fit-content;
     cursor: pointer;
 }
-
 #loadingroom_idcontainer{
     display: flex;
     justify-content: center;
