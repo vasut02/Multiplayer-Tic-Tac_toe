@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import './Loading.css'
 
 const Loading = ({ room_id }) => {

@@ -9,6 +9,7 @@ div p {
     width: fit-content;
     cursor: pointer;
 }
+
 #loadingroom_idcontainer{
     display: flex;
     justify-content: center;

@@ -1,16 +1,11 @@
 /*IMPORTS*/
 import React ,{useState , useEffect , useContext} from 'react'
 import Input from './input/Input'
-import io from 'socket.io-client'
-import serverURL from "../../../constant";
 import Message from './Messages/Message'
 import {UserContext} from "../../../UserContext"
 
-// let socket;
 const Chat = ({socket , room_id}) => {
     
-    const ENDPT = `http://${serverURL}/`
-
     const {user , setUser} = useContext(UserContext);
     //to store in input FORM
     const [message, setMessage] = useState('');
