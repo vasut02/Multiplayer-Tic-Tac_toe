@@ -3,8 +3,6 @@ import { Redirect} from "react-router-dom";
 import { UserContext } from "../../UserContext";
 import Cookies from 'universal-cookie';
 
-
-
 const Nickname = () => {
     //user context
     const { user, setUser } = useContext(UserContext);
@@ -28,7 +26,7 @@ const Nickname = () => {
 
             let result = "";
             for (let index = 0; index < 15; index++) {
-                if (index ==5 || index == 10 ){
+                if (index === 5 || index === 10 ){
                     result += '-'
                 }else
                     result += alphabet[Math.floor(Math.random() * 10000) % 35];
@@ -43,6 +41,7 @@ const Nickname = () => {
             setUser(newUser);
         }
     }
+    
     
     if (user !== null && user !== undefined ){
         console.log(cookies.get('user'));

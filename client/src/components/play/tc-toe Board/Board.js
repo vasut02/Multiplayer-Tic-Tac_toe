@@ -2,12 +2,9 @@ import React, { useState, useContext, useEffect , useRef } from 'react';
 import Sqaure from './Sqaure'
 import calculateWinner from "./calculateWinner";
 import { UserContext } from "../../../UserContext"
-import serverURL from "../../../constant";
+import './Game.css'
 
-// let socket;
 const Board = ({ socket, room_id }) => {
-
-	const ENDPT = `http://${serverURL}/`
 
 	const { user, setUser } = useContext(UserContext);
 	const [squares, setSquares] = useState(Array(9).fill(null))

@@ -5,7 +5,6 @@ import Chat from './chat/Chat';
 import io from 'socket.io-client'
 import serverURL from "../../constant";
 import {UserContext} from "../../UserContext"
-import Game from './tc-toe Board/Game'
 import Board from './tc-toe Board/Board'
 import './play.css'
 import Loading from './Loading/Loading'

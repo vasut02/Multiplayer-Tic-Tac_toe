@@ -2,12 +2,7 @@ import React from 'react'
 import './msg.css'
 
 const Msg = ({ message, user }) => {
-
-    function gotoBottom(id){
-        var element = document.getElementById(id);
-        element.scrollTop = element.scrollHeight - element.clientHeight;
-    }
-
+    
     if (user.id === message.user_id) {
         return (
             <div className="row right-align">

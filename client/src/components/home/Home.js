@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext} from 'react'
 import "./Home.css";
 import { UserContext } from "../../UserContext";
-import { useHistory, Link, Redirect } from "react-router-dom";
+import { useHistory,  Redirect } from "react-router-dom";
 import serverURL from '../../constant'
 const axios = require('axios');
 
@@ -9,17 +9,6 @@ const Home = () => {
     const { user, setUser } = useContext(UserContext);
     const [room_id, setRoom_id] = useState('');
     const [error, setError] = useState('')
-
-    //Sample User
-    const Vasu = {
-        name: "vasu",
-        id: "69"
-    }
-
-    //Set User just for example
-    // useEffect(() => {
-    //     setUser(Vasu);
-    // }, [])
 
     const joinRoom = async (e) => {
         e.preventDefault();
@@ -49,6 +38,7 @@ const Home = () => {
             });
 
     }
+    
     //Programitically navigate Using React-Router-Dom
     const browserHistory = useHistory();
 
