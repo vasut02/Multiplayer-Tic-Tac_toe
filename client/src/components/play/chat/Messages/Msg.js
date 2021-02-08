@@ -8,7 +8,7 @@ const Msg = ({ message, user }) => {
             <div className="row right-align">
                 <div className="right">
                     <p className="sentbyme">
-                        {message.name}:{message.text}
+                        {message.name}: {message.text}
                     </p>
                 </div>
             </div>
@@ -18,7 +18,7 @@ const Msg = ({ message, user }) => {
             <div className="row left-align">
                 <div className="left">
                     <p className="opponent">
-                        {message.name}:{message.text}
+                        {message.name}: {message.text}
                     </p>
                 </div>
             </div>

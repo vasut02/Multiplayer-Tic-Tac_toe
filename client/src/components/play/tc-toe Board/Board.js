@@ -12,13 +12,15 @@ const Board = ({ socket, room_id }) => {
 	const forceUpdate = React.useCallback(() => updateState({}), []);
 	const xIsNext = useRef(true);
 	const Chance = useRef(1);
+	const Player = useRef('');
 	
 	const winner = calculateWinner(squares);
 	let status;
 	if (winner) {
-		status = 'Winner: ' + winner;
+		status = (Player.current  === user.id )?'Winner Winner Chicken Dinner ' : 'Better Luck Next Time';
+		// status = 'Better Luck Next Time:' +Player.current;
 	} else {
-		status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+		status = (Player.current  !== user.id )?'Your Chance':'Opponent Chance';
 	}
 
 	useEffect(() => {
@@ -27,6 +29,8 @@ const Board = ({ socket, room_id }) => {
 			squares[i] = xIsNext.current ? 'X' : 'O';
 			xIsNext.current = !xIsNext.current;				
 			setSquares(squares);
+
+			Player.current = click.user_id;
 
 			if ( Chance.current === 2 ) Chance.current = 1;
 			if ( Chance.current === -1 ) Chance.current = 2;
@@ -42,6 +46,7 @@ const Board = ({ socket, room_id }) => {
 			setSquares(squares)
 			console.log(squares);
 			Chance.current = 1;
+			Player.current = '';
 			forceUpdate();
 		})
 	}, [squares])

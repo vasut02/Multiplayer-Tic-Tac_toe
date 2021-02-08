@@ -15,7 +15,7 @@
     display: inline-block;
     border-radius: 5px;
     padding: 1rem;
-    background: #64b5f6 ;
+    background: #81cc00 ;
     color: #f6f6f6;
     -webkit-animation: bounce-in 1s 1;
             animation: bounce-in 1s 1;
@@ -29,7 +29,7 @@
     position: absolute;
     content: "";
     border: 1rem solid;
-    border-color: #64b5f6  transparent transparent #64b5f6;
+    border-color: #81cc00  transparent transparent #81cc00;
   }
   
   .sentbyme {

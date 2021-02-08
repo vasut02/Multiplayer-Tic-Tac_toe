@@ -47,7 +47,6 @@ const Play = () => {
     }
     return ( playNow && socketHasBeenInitialized)?(        
         <div className='play'>
-            {room_id?room_id:''}
             <Board socket={socket} room_id={room_id?room_id:''} />
             <Chat socket={socket} room_id={room_id?room_id:''} />
         </div>
